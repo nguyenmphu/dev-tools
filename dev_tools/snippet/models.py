@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Language(models.Model):
-    name = models.CharField(max_length=31)
+    name = models.CharField(max_length=31, unique=True)
 
     class Meta:
         ordering = ("name",)
@@ -13,7 +13,7 @@ class Language(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=31)
+    name = models.CharField(max_length=31, unique=True)
 
     class Meta:
         ordering = ("name",)
@@ -30,3 +30,6 @@ class Snippet(models.Model):
     updated_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("-created_at", )
